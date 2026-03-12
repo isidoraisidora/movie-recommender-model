@@ -1,115 +1,154 @@
-Movie Recommendation System
+# Movie Recommendation System
 
-Overview
+This project implements two versions of a **content-based movie recommendation system** using machine learning techniques.  
+The system recommends movies that are similar to a given movie based on their features.
 
-This project implements a **content-based movie recommendation system** using Natural Language Processing (NLP). The system recommends movies that are similar to a movie selected by the user based on their content features.
-
-Instead of relying on ratings from other users, the model analyzes movie metadata (in this case mainly **genres**) and finds movies that share similar characteristics.
-
----
-
-How the Model Works
-
-1. Data Preprocessing
-
-The movie dataset is cleaned and prepared by:
-
-* Removing unnecessary columns
-* Cleaning movie titles
-* Removing the year from movie titles
-* Preparing genre information for analysis
-
-2. Text Vectorization
-
-The genre information is converted into numerical vectors using **TF-IDF (Term Frequency–Inverse Document Frequency)**. This method transforms text data into numbers so that it can be processed by machine learning algorithms.
-
-3. Similarity Calculation
-
-To determine how similar two movies are, the system computes **cosine similarity** between their TF-IDF vectors. Movies with higher similarity scores are considered more related.
-
-4. Generating Recommendations
-
-When a user enters a movie title:
-
-1. The system finds that movie in the dataset.
-2. It calculates similarity between that movie and all others.
-3. It returns the most similar movies as recommendations.
+The project demonstrates how recommendation systems can improve by incorporating richer information from datasets.
 
 ---
 
-Example
+# Project Structure
+
+```
+movie-recommendation-system/
+│
+├── v1_genre_recommender/
+│
+├── v2_content_recommender/
+│
+├── requirements.txt
+└── README.md
+```
+
+---
+
+# Version 1: Genre-Based Recommender
+
+Version 1 is a **simple content-based recommender** that suggests movies based only on their genres.
+
+## Features Used
+
+- Movie title
+- Genres
+
+## Method
+
+1. Load movie dataset
+2. Clean and preprocess genre data
+3. Convert genres into numerical vectors using **CountVectorizer**
+4. Compute similarity between movies using **cosine similarity**
+5. Recommend movies with the highest similarity scores
+
+## Example
 
 Input:
 
-recommend("Toy story")
+```
+recommend("Toy Story")
+```
 
-Example Output:
+Output:
 
-Toy story 2
-Monsters, inc.
-A bug's life
-Finding nemo
+```
+Toy Story 2
+A Bug's Life
+Monsters, Inc.
+Finding Nemo
+Cars
+```
 
-These movies are recommended because they share similar **genres and themes**.
-
----
-
-## Technologies Used
-
-* Python
-* Pandas
-* NumPy
-* Scikit-learn
-* Jupyter Notebook
+This version demonstrates the **basic concept of content-based filtering**.
 
 ---
 
-## Project Structure
+# Version 2: Content-Based Recommender (Enhanced)
 
-MovieRecommendationSystem/
+Version 2 improves the recommendation system by using **multiple movie features** instead of only genres.
 
-data/
-movies.csv
+## Dataset
 
-notebook.ipynb
-recommender.py
-requirements.txt
-README.md
+This version uses the **TMDB 5000 Movie Dataset**, which contains rich movie metadata.
+
+Files used:
+
+- `tmdb_5000_movies.csv`
+- `tmdb_5000_credits.csv`
+
+## Features Used
+
+The recommender combines several attributes to represent each movie:
+
+- Genres
+- Keywords
+- Movie overview (description)
+- Cast (top 3 actors)
+- Director
+
+## Data Processing Pipeline
+
+1. Load movie and credits datasets
+2. Merge datasets using movie title
+3. Extract useful information from JSON columns
+4. Clean and normalize text features
+5. Combine features into a single **tags** column
+
+Example combined representation:
+
+```
+overview + genres + keywords + cast + director
+```
+
+## Vectorization
+
+The text features are converted into numerical vectors using **CountVectorizer** from scikit-learn.
+
+Each movie is represented as a vector in a high-dimensional space.
+
+## Similarity Calculation
+
+The system computes similarity between movies using **cosine similarity**.
+
+Movies with the highest similarity scores are recommended.
+
+## Example
+
+Input:
+
+```
+recommend("Avatar")
+```
+
+Output:
+
+```
+Guardians of the Galaxy
+John Carter
+Star Trek
+Aliens
+The Fifth Element
+```
+
+Compared to Version 1, this version provides **more meaningful recommendations** because it considers the movie's story, cast, and themes.
 
 ---
 
-How to Run
+# Technologies Used
 
-1. Clone the repository
-
-git clone https://github.com/isidoraisidora/movie-recommender-model.git
-
-2. Install dependencies
-
-pip install -r requirements.txt
-
-3. Run the recommender system in Python
-
-recommend("Toy story")
-
----
-Future Improvements
-
-Possible improvements include:
-
-* Adding movie descriptions and keywords
-* Implementing collaborative filtering
-* Building a hybrid recommendation system
-* Creating a web interface using Streamlit
-* Integrating movie posters using external APIs
+- Python
+- Pandas
+- NumPy
+- scikit-learn
 
 ---
 
-Learning Goals
+# Future Improvements
 
-This project demonstrates important machine learning and data science concepts:
+Possible improvements for the project:
 
-* Natural Language Processing
-* Feature engineering
-* Vector similarity
-* Content-based recommendation systems
+- Using **TF-IDF vectorization**
+- Applying **stemming or lemmatization**
+- Creating a **web interface using Streamlit**
+- Adding **movie posters using the TMDB API**
+- Deploying the recommender as a web application
+
+---
