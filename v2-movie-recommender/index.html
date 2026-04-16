@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Predictor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Add this to your style.css */
+        .form-control:focus {
+            border-color: #0d6efd; /* Keeps the blue border */
+            outline: 0;
+            /* This makes the shadow 2px wide instead of the default 4px or more */
+            box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.25);
+        }
+    </style>
+</head>
+<body class="bg-light">
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4">Movie Discovery</h1>
+        <p class="lead">Tell me a movie you love, and I'll find your next favorite.</p>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="input-group mb-3">
+                <input type="text" id="movieInput" class="form-control" placeholder="Enter a movie title...">
+                <button class="btn btn-primary" type="button" id="predictBtn">Predict</button>
+            </div>
+            <div id="loading" class="text-center d-none">
+                <div class="spinner-border text-primary" role="status"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="resultsContainer" class="row mt-4">
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
