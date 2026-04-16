@@ -68,7 +68,7 @@ movies["tags"] = (movies["overview"] + movies["genres"] + movies["keywords"] + m
 movies["tags"] = movies["tags"].apply(lambda x: " ".join(x))
 
 cv = CountVectorizer(max_features=5000, stop_words="english")
-vectors = cv.fit_transform(movies["tags"]).toarray()
+vectors = cv.fit_transform(movies["tags"]).toarray().astype('float32')
 similarity = cosine_similarity(vectors)
 
 
