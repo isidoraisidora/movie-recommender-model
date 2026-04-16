@@ -14,8 +14,8 @@ document.getElementById('predictBtn').addEventListener('click', async () => {
     resultsContainer.innerHTML = '';
 
     try {
-        // This is the bridge to your FastAPI
-        const response = await fetch('http://127.0.0.1:8000/predict', {
+        // Added 'predict' to the end of the URL
+        const response = await fetch('https://movie-recommender-model-fzfv.onrender.com/predict', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
